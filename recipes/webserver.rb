@@ -25,3 +25,12 @@ end
 nginx_site 'redstalker' do
     enable true
 end
+
+template "#{node[:nginx]['dir']}/sites-available/blog" do
+    source "blog.conf.erb"
+    notifies :restart, 'service[nginx]'
+end
+
+nginx_site 'blog' do
+    enable true
+end
